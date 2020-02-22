@@ -2,7 +2,7 @@
 
 # Kasaya (beta)
 
-### A "WYSIWYG" scripting language and runtime for browser automation
+### A "WYSIWYG" (kind of) scripting language and runtime for browser automation
 
 * Write test scripts using English-like statements.
 * NO coding required to implement those statements.
@@ -102,6 +102,8 @@ Kasaya supports the following block level structures:
 * `in this context` - declare constants and imports for the file context
 * `how to <macro phrase>` - declares a macro
 * `start <run block>` - statements within run blocks will be executed immediately
+
+*TODO: Some good macro examples*
 
 ### Variables
 
