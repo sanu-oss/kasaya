@@ -651,7 +651,7 @@ process.on('unhandledRejection', catchUnhandledError);
   try {
     await seleniumStart();
   } catch (err) {
-    messageEmitter.emitError(`Initialization failed: ${e.message}`);
+    messageEmitter.emitError(`Initialization failed: ${err.message}`);
     process.exit(0);
   }
 
