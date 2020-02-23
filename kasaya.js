@@ -648,7 +648,13 @@ process.on('uncaughtException', catchUnhandledError);
 process.on('unhandledRejection', catchUnhandledError);
 
 (async () => {
-  await seleniumStart();
+  try {
+    await seleniumStart();
+  } catch (err) {
+    messageEmitter.emitError(`Initialization failed: ${err.message}`);
+    process.exit(0);
+  }
+
   const script = process.argv[2];
   const {
     mode, extension, headless, env,
