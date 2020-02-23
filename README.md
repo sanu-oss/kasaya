@@ -33,6 +33,7 @@
 - [Getting started](#getting-started)
 - [Grammar](#grammar)
 - [Command reference](#command-reference)
+- [Limitations](#Limitations)
 - [VS Code Extension](#vs-code-extension)
 - [FAQ](#faq)
 
@@ -135,6 +136,14 @@ print $sender
 *TODO: Improve this section*
 
 [More commands](https://github.com/syscolabs/kasaya/blob/master/docs/command-summary.md)
+
+# Limitations
+
+* This is still very much beta. We announced it so that we can get early feedback to improve. So please let us know about the rough edges.
+* Remember, this is not meant to be a general purpose DSL. It's a language of instruction for tests, and therefore it has no conditionals or loops (no `if` or `for`). If you require an `if` or `for` in a test, that's probably a sign that you're trying to fit multiple test scenarios into a single test. The other thing is, DSLs rapidly go downhill when you try to make them "Turing Complete. We're trying not to enter that Vietnam :)
+* We're currently based on Selenium, and with that comes the JDK. We're looking for alternatives.
+* The "natural language processing" here is based on the [JARVIS](https://github.com/hliyan/jarvis). The R in JARVIS stands for "Rudimentary", in that it uses fairly rudimentary pattern matching instead of parsing. Not pretty but gets the job done.
+* Headless + CI - we got it, but give us time to document it properly.
 
 # VS Code Extension
 
