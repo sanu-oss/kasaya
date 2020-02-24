@@ -103,6 +103,7 @@ Kasaya supports the following block level structures:
 * `in this context` - declare constants and imports for the file context
 * `how to <macro phrase>` - declares a macro
 * `start <run block>` - statements within run blocks will be executed immediately
+* [More on macros](docs/macros.md)
 
 *TODO: Some good macro examples*
 
