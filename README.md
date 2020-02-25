@@ -1,6 +1,7 @@
 <img src="https://raw.githubusercontent.com/syscolabs/kasaya/master/docs/images/Logo-Kasaya-v5-with-text.png" width="250px" />
 
 # Kasaya (beta)
+[![Gitter](https://badges.gitter.im/kasaya-test/community.svg)](https://gitter.im/kasaya-test/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ### A "WYSIWYG" (kind of) scripting language and runtime for browser automation
 
