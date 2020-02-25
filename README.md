@@ -3,7 +3,7 @@
 # Kasaya (beta)
 [![Gitter](https://badges.gitter.im/kasaya-test/community.svg)](https://gitter.im/kasaya-test/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-### A "WYSIWYG" (kind of) scripting language and runtime for browser automation
+### A "WYSIWYG" (well, kind of) scripting language and runtime for browser automation
 
 * Write test scripts using English-like statements.
 * NO coding required to implement those statements.
@@ -17,7 +17,9 @@
   * Share with QA to expand the scenarios.
   * Even share with the product manager.
 
-### What You See Is What You Write:
+### What You See Is What You Script:
+
+This is an interactive session. But normally, you will write a script and run it headless.
 
 ---
 
@@ -182,3 +184,7 @@ But if you find bugs, or have great ideas, let us know!
 ## I found a bug.
 
 Great! Please report it on our issue tracker, with reproduction steps: https://github.com/syscolabs/kasaya/issues
+
+## How about running headless, and CI?
+
+Working on all of those, stay tuned. Any more requests, suggestions?
