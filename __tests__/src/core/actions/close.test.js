@@ -12,8 +12,8 @@ describe('close command test suite', () => {
         closeWindow: jest.fn(),
         getWindowHandles: jest.fn(),
         deleteSession: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
   });
 
@@ -47,6 +47,9 @@ describe('close command test suite', () => {
 
     await close(state, { args: { what: 'wrong value' } });
     expect(state.browser.closeWindow).not.toHaveBeenCalled();
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: CLOSE_ERR, type: MESSAGE_TYPE.ERROR });
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: CLOSE_ERR,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 });

@@ -34,7 +34,10 @@ module.exports = async (state, { args: { what } }) => {
         return;
       }
       default: {
-        return logger.emitLogs({ message: CLOSE_ERR, type: MESSAGE_TYPE.ERROR });
+        return logger.emitLogs({
+          message: CLOSE_ERR,
+          type: MESSAGE_TYPE.ERROR
+        });
       }
     }
   }

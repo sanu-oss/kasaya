@@ -6,27 +6,46 @@ function waitForElementPick(done) {
     ELEMENT: 1,
     ATTRIBUTE: 2,
     TEXT: 3,
-    COMMENT: 8,
+    COMMENT: 8
   };
 
   function generateXPathFromElement(element) {
     let elm = element;
     let segs;
-    const vectorGraphicElements = ['svg', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'path', 'text'];
+    const vectorGraphicElements = [
+      'svg',
+      'rect',
+      'circle',
+      'ellipse',
+      'line',
+      'polyline',
+      'polygon',
+      'path',
+      'text'
+    ];
     const allNodes = document.getElementsByTagName('*');
-    for (segs = []; elm && elm.nodeType === NODE_TYPE.ELEMENT; elm = elm.parentNode) {
-      const isVectorGraphicElement = vectorGraphicElements.includes(elm.localName);
+    for (
+      segs = [];
+      elm && elm.nodeType === NODE_TYPE.ELEMENT;
+      elm = elm.parentNode
+    ) {
+      const isVectorGraphicElement = vectorGraphicElements.includes(
+        elm.localName
+      );
       if (!isVectorGraphicElement && elm.hasAttribute('id')) {
         let uniqueIdCount = 0;
         for (let n = 0; n < allNodes.length; n += 1) {
-          if (allNodes[n].hasAttribute('id') && allNodes[n].id === elm.id) uniqueIdCount += 1;
+          if (allNodes[n].hasAttribute('id') && allNodes[n].id === elm.id)
+            uniqueIdCount += 1;
           if (uniqueIdCount > 1) break;
         }
         if (uniqueIdCount === 1) {
           segs.unshift(`[@id="${elm.getAttribute('id')}"]`);
           return `//*${segs.join('/')}`;
         }
-        segs.unshift(`${elm.localName.toLowerCase()}[@id="${elm.getAttribute('id')}"]`);
+        segs.unshift(
+          `${elm.localName.toLowerCase()}[@id="${elm.getAttribute('id')}"]`
+        );
       } else {
         let i;
         let sib;
@@ -115,33 +134,37 @@ function waitForElementPick(done) {
     const follower = document.getElementById('kasaya-follower');
     follower.style.display = '';
 
-    createDocumentEventListener('mouseover', (event) => {
+    createDocumentEventListener('mouseover', event => {
       event.target.classList.add('specelement');
       follower.style.left = `${event.clientX}px`;
       follower.style.top = `${event.clientY}px`;
     });
 
-    createDocumentEventListener('mouseout', (event) => {
+    createDocumentEventListener('mouseout', event => {
       event.target.classList.remove('specelement');
       follower.style.left = `${event.clientX}px`;
       follower.style.top = `${event.clientY}px`;
     });
 
-    createDocumentEventListener('mousemove', (event) => {
+    createDocumentEventListener('mousemove', event => {
       follower.style.left = `${event.clientX - 10}px`;
       follower.style.top = `${event.clientY - 10}px`;
     });
 
-    createDocumentEventListener('click', (event) => {
-      event.stopPropagation();
-      event.preventDefault();
-      cb(generateXPathFromElement(event.target));
-    }, true);
+    createDocumentEventListener(
+      'click',
+      event => {
+        event.stopPropagation();
+        event.preventDefault();
+        cb(generateXPathFromElement(event.target));
+      },
+      true
+    );
   }
 
   injectCustomStyles();
   injectFollower();
-  enableFollower((xpath) => {
+  enableFollower(xpath => {
     removeCreatedListeners();
     done(xpath);
   });

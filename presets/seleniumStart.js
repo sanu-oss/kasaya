@@ -12,12 +12,12 @@ module.exports = async () => {
     drivers: {
       chrome: {
         version: config.drivers.chrome.version,
-        arch: process.arch,
+        arch: process.arch
       },
       firefox: {
         version: config.drivers.firefox.version,
-        arch: process.arch,
-      },
-    },
+        arch: process.arch
+      }
+    }
   });
 };

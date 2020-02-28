@@ -8,8 +8,8 @@ describe('switch command test suite', () => {
     const state = {
       browser: {
         getWindowHandle: jest.fn(),
-        getWindowHandles: jest.fn(),
-      },
+        getWindowHandles: jest.fn()
+      }
     };
     state.browser.getWindowHandles.mockResolvedValue([uuid()]);
     state.browser.getWindowHandle.mockResolvedValue(uuid());
@@ -24,8 +24,8 @@ describe('switch command test suite', () => {
       browser: {
         getWindowHandles: jest.fn(),
         getWindowHandle: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     const handles = [uuid(), uuid()];
     const currentWindow = handles[0];
@@ -44,8 +44,8 @@ describe('switch command test suite', () => {
       browser: {
         getWindowHandles: jest.fn(),
         getWindowHandle: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     const handles = [uuid(), uuid()];
     const currentWindow = handles[1];
@@ -63,8 +63,8 @@ describe('switch command test suite', () => {
     const state = {
       browser: {
         getWindowHandle: jest.fn(),
-        getWindowHandles: jest.fn(),
-      },
+        getWindowHandles: jest.fn()
+      }
     };
     state.browser.getWindowHandles.mockResolvedValue([uuid()]);
     state.browser.getWindowHandle.mockResolvedValue(uuid());
@@ -79,8 +79,8 @@ describe('switch command test suite', () => {
       browser: {
         getWindowHandles: jest.fn(),
         getWindowHandle: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     const handles = [uuid(), uuid()];
     const currentWindow = handles[0];
@@ -99,8 +99,8 @@ describe('switch command test suite', () => {
       browser: {
         getWindowHandles: jest.fn(),
         getWindowHandle: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     const handles = [uuid(), uuid()];
     const currentWindow = handles[1];
@@ -119,8 +119,8 @@ describe('switch command test suite', () => {
       browser: {
         getWindowHandles: jest.fn(),
         getWindowHandle: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     logger.emitLogs = jest.fn();
 
@@ -128,6 +128,9 @@ describe('switch command test suite', () => {
     expect(state.browser.getWindowHandle).not.toHaveBeenCalled();
     expect(state.browser.getWindowHandles).not.toHaveBeenCalled();
     expect(state.browser.switchToWindow).not.toHaveBeenCalled();
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: SWITCH_ERR, type: MESSAGE_TYPE.ERROR });
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: SWITCH_ERR,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 });

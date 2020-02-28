@@ -5,7 +5,8 @@ function eraseHighlights() {
   const kasayaStyles = document.getElementById('kasaya-styles');
   const kasayaFollowerStyles = document.getElementById('kasaya-follwer-styles');
   if (kasayaStyles) kasayaStyles.parentElement.removeChild(kasayaStyles);
-  if (kasayaFollowerStyles) kasayaFollowerStyles.parentElement.removeChild(kasayaFollowerStyles);
+  if (kasayaFollowerStyles)
+    kasayaFollowerStyles.parentElement.removeChild(kasayaFollowerStyles);
 
   // remove follower element
   const follower = document.getElementById('kasaya-follower');

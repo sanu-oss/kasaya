@@ -1,6 +1,6 @@
 const { validateBrowser } = require('../../utils/validate');
 
-module.exports = async (state) => {
+module.exports = async state => {
   const browser = validateBrowser(state);
 
   if (browser) {

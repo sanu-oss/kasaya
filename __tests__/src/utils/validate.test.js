@@ -4,7 +4,7 @@ const messageEmitter = require('../../../src/utils/messageEmitter');
 describe('validate test suite', () => {
   test('browser should validate the state and return the browser', () => {
     const state = {
-      browser: {},
+      browser: {}
     };
 
     const validatedBrowser = validateBrowser(state);
@@ -16,16 +16,20 @@ describe('validate test suite', () => {
     messageEmitter.emitError = jest.fn();
 
     validateBrowser(state);
-    expect(messageEmitter.emitError).toHaveBeenCalledWith('No browser session found.!');
+    expect(messageEmitter.emitError).toHaveBeenCalledWith(
+      'No browser session found.!'
+    );
   });
 
   test('browser should log an error message with invalid browser', () => {
     const state = {
-      browser: undefined,
+      browser: undefined
     };
     messageEmitter.emitError = jest.fn();
 
     validateBrowser(state);
-    expect(messageEmitter.emitError).toHaveBeenCalledWith('No browser session found.!');
+    expect(messageEmitter.emitError).toHaveBeenCalledWith(
+      'No browser session found.!'
+    );
   });
 });

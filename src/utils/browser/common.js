@@ -4,16 +4,24 @@ function isPageLoaded() {
 
 function getInnerText(searchPaths) {
   function getElementByXpath(path) {
-    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    return document.evaluate(
+      path,
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null
+    ).singleNodeValue;
   }
 
   const elementInnerTexts = searchPaths
-    .map((path) => {
+    .map(path => {
       const element = getElementByXpath(path);
       const elementInnerText = element ? element.innerText : null;
-      return (element && !elementInnerText && element.nodeName === 'INPUT') ? { innerText: element.value, xpath: path } : { innerText: elementInnerText, xpath: path };
+      return element && !elementInnerText && element.nodeName === 'INPUT'
+        ? { innerText: element.value, xpath: path }
+        : { innerText: elementInnerText, xpath: path };
     })
-    .filter((elementDetails) => elementDetails.innerText);
+    .filter(elementDetails => elementDetails.innerText);
 
   return elementInnerTexts;
 }
@@ -50,13 +58,22 @@ function highlightMatches(xpathList) {
     if (element) {
       element.classList.add('specelement');
       if (badgeValue !== undefined) {
-        element.insertAdjacentHTML('afterend', `<span class="specelement-nrep-badge">${badgeValue}</span>`);
+        element.insertAdjacentHTML(
+          'afterend',
+          `<span class="specelement-nrep-badge">${badgeValue}</span>`
+        );
       }
     }
   }
 
   function getElementByXpath(path) {
-    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    return document.evaluate(
+      path,
+      document,
+      null,
+      XPathResult.FIRST_ORDERED_NODE_TYPE,
+      null
+    ).singleNodeValue;
   }
 
   injectCustomStyles();
@@ -74,28 +91,27 @@ function isElementDisabledFromStyles(el) {
 }
 
 function getPlaceholder(element) {
-  return (element.placeholder && element.value === '') ? element.placeholder : '';
+  return element.placeholder && element.value === '' ? element.placeholder : '';
 }
 
 function simulateDragDrop(sourceNode, destinationNode) {
   const EVENT_TYPES = {
     DRAG_END: 'dragend',
     DRAG_START: 'dragstart',
-    DROP: 'drop',
+    DROP: 'drop'
   };
 
   function createCustomEvent(type) {
     const event = new CustomEvent('CustomEvent');
     event.initCustomEvent(type, true, true, null);
     event.dataTransfer = {
-      data: {
-      },
+      data: {},
       setData(dataType, val) {
         this.data[dataType] = val;
       },
       getData(dataType) {
         return this.data[dataType];
-      },
+      }
     };
     return event;
   }
@@ -127,5 +143,5 @@ module.exports = {
   highlightMatches,
   isElementDisabledFromStyles,
   getPlaceholder,
-  simulateDragDrop,
+  simulateDragDrop
 };

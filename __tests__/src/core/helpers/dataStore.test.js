@@ -11,7 +11,6 @@ describe('data store suite', () => {
     expect(store.getLocal(key, context)).toEqual({ context, key, value });
   });
 
-
   test('data store should store and retrieve globally with key (starting with $) and value', () => {
     const key = `$${uuid()}`;
     const value = uuid();

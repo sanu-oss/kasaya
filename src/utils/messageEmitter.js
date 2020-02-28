@@ -41,12 +41,14 @@ function emitInProgress(message) {
 }
 
 function emitUsageHelp(baseCommand, description, message) {
-  console.log(chalk.grey(
-    `Usage: 
+  console.log(
+    chalk.grey(
+      `Usage: 
         ${baseCommand} - ${description}
         ${message}
-        `,
-  ));
+        `
+    )
+  );
 }
 
 function emitPlainText(message) {
@@ -67,7 +69,9 @@ function emitTestSummary(message) {
 
 function emitHelp(message, separatorCharCount) {
   const phrase = message.split('-');
-  console.log(chalk.cyan(`\t${phrase[0].padEnd(separatorCharCount, '-')}-${phrase[1]}`));
+  console.log(
+    chalk.cyan(`\t${phrase[0].padEnd(separatorCharCount, '-')}-${phrase[1]}`)
+  );
 }
 
 module.exports = {
@@ -82,5 +86,5 @@ module.exports = {
   emitTestSuccess,
   emitTestWarn,
   emitTestSummary,
-  emitHelp,
+  emitHelp
 };

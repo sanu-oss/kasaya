@@ -8,24 +8,33 @@ describe('browser snapshot test suite', () => {
     const mockSnapshot = { browser: 'browser_name' };
     const state = {
       browser: {
-        execute: jest.fn().mockResolvedValue(mockSnapshot),
-      },
+        execute: jest.fn().mockResolvedValue(mockSnapshot)
+      }
     };
     store.setGlobal = jest.fn();
     logger.emitLogs = jest.fn();
     const snapshotReference = '$snapshot_name';
 
     await snapshot(state, { mode: 'get' }, { args: { snapshotReference } });
-    expect(store.setGlobal).toHaveBeenCalledWith({ key: snapshotReference, value: mockSnapshot });
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `Browser snapshot created as "${snapshotReference.replace('$', '')}"`, type: MESSAGE_TYPE.INFO });
+    expect(store.setGlobal).toHaveBeenCalledWith({
+      key: snapshotReference,
+      value: mockSnapshot
+    });
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `Browser snapshot created as "${snapshotReference.replace(
+        '$',
+        ''
+      )}"`,
+      type: MESSAGE_TYPE.INFO
+    });
   });
 
   test('set snapshot should call the execute function and refresh', async () => {
     const state = {
       browser: {
         execute: jest.fn(),
-        refresh: jest.fn(),
-      },
+        refresh: jest.fn()
+      }
     };
     store.getGlobal = jest.fn();
     const snapshotReference = '$snapshot_name';

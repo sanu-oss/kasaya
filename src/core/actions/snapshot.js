@@ -9,9 +9,19 @@ module.exports = async (state, { mode }, { args: { snapshotReference } }) => {
 
   if (browser && snapshotReference) {
     if (mode === 'get') {
-      const browserSnapshot = await browser.execute(snapshotHelper, mode, undefined);
+      const browserSnapshot = await browser.execute(
+        snapshotHelper,
+        mode,
+        undefined
+      );
       store.setGlobal({ key: snapshotReference, value: browserSnapshot });
-      logger.emitLogs({ message: `Browser snapshot created as "${snapshotReference.replace('$', '')}"`, type: MESSAGE_TYPE.INFO });
+      logger.emitLogs({
+        message: `Browser snapshot created as "${snapshotReference.replace(
+          '$',
+          ''
+        )}"`,
+        type: MESSAGE_TYPE.INFO
+      });
     }
     if (mode === 'set') {
       const browserSnapshot = store.getGlobal(snapshotReference);

@@ -20,13 +20,20 @@ module.exports = async (state, { args: { typeText } }) => {
       'text',
       'time',
       'url',
-      'week',
+      'week'
     ];
-    const inputType = await browser.getElementAttribute(activeTextBox.ELEMENT, 'type');
-    const isTypableInput = (tagName === 'input' && (typableInputs.includes(inputType)));
+    const inputType = await browser.getElementAttribute(
+      activeTextBox.ELEMENT,
+      'type'
+    );
+    const isTypableInput =
+      tagName === 'input' && typableInputs.includes(inputType);
 
     if (!(tagName === 'textarea' || isTypableInput)) {
-      return logger.emitLogs({ message: ACTIVE_ELEMENT_ERR, type: MESSAGE_TYPE.ERROR });
+      return logger.emitLogs({
+        message: ACTIVE_ELEMENT_ERR,
+        type: MESSAGE_TYPE.ERROR
+      });
     }
     await browser.elementSendKeys(activeTextBox.ELEMENT, [typeText]);
   }

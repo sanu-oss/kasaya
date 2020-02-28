@@ -24,7 +24,7 @@ class DataStore {
   }
 
   getLocal(key, context) {
-    return this._locals.find((l) => l.context === context && l.key === key);
+    return this._locals.find(l => l.context === context && l.key === key);
   }
 
   clearGlobals() {
@@ -32,7 +32,7 @@ class DataStore {
   }
 
   clearLocals({ context }) {
-    this._locals = this._locals.filter((lo) => lo.context !== context);
+    this._locals = this._locals.filter(lo => lo.context !== context);
   }
 }
 
@@ -45,5 +45,5 @@ module.exports = {
       this._store = new DataStore();
     }
     return this._store;
-  },
+  }
 };

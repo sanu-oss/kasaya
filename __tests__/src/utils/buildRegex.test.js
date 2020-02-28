@@ -1,13 +1,18 @@
 const {
-  buildRegexEscapedString, buildRegexFromParamString, buildNamedRegexFromParamString, extractParamsFromText,
+  buildRegexEscapedString,
+  buildRegexFromParamString,
+  buildNamedRegexFromParamString,
+  extractParamsFromText
 } = require('../../../src/utils/buildRegex');
-
 
 describe('buildRegex module test suite', () => {
   test('buildNamedRegexFromParamString function should build a named regular expression string given a parameterized string', () => {
-    const parameterizedStr = 'Created by ${user} (${userRole}) on ${date} at ${time}';
+    const parameterizedStr =
+      'Created by ${user} (${userRole}) on ${date} at ${time}';
     const regexStr = buildNamedRegexFromParamString(parameterizedStr);
-    expect(regexStr).toBe('Created by (?<user>.+) \\((?<userRole>.+)\\) on (?<date>.+) at (?<time>.+)');
+    expect(regexStr).toBe(
+      'Created by (?<user>.+) \\((?<userRole>.+)\\) on (?<date>.+) at (?<time>.+)'
+    );
   });
 
   test('buildNamedRegexFromParamString function should return the the provided input as is if the input is null/undefined', () => {
@@ -18,7 +23,8 @@ describe('buildRegex module test suite', () => {
   });
 
   test('buildRegexFromParamString function should build a generic regular expression string given a parameterized string', () => {
-    const parameterizedStr = 'Created by ${user} (${userRole}) on ${date} at ${time}';
+    const parameterizedStr =
+      'Created by ${user} (${userRole}) on ${date} at ${time}';
     const regexStr = buildRegexFromParamString(parameterizedStr);
     expect(regexStr).toBe('Created by (.+) \\((.+)\\) on (.+) at (.+)');
   });
@@ -31,8 +37,10 @@ describe('buildRegex module test suite', () => {
   });
 
   test('extractParamsFromText function should extract the parameter values from a given string evaluated against a provided parameterized string', () => {
-    const parameterizedStr = 'Created by ${user} (${userRole}) on ${date} at ${time}';
-    const text = 'Created by John Doe (Administrator) on 9th July 2018 at 12.00PM';
+    const parameterizedStr =
+      'Created by ${user} (${userRole}) on ${date} at ${time}';
+    const text =
+      'Created by John Doe (Administrator) on 9th July 2018 at 12.00PM';
     const tokens = extractParamsFromText(text, parameterizedStr);
     expect(tokens.user).toBe('John Doe');
     expect(tokens.userRole).toBe('Administrator');

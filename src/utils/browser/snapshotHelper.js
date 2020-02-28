@@ -31,13 +31,13 @@ function snapshotHelper(mode, browserSnapshotString) {
   }
 
   function setSessionStorage(sessionStorageStore) {
-    Object.keys(sessionStorageStore).forEach((key) => {
+    Object.keys(sessionStorageStore).forEach(key => {
       window.sessionStorage.setItem(key, sessionStorageStore[key]);
     });
   }
 
   function setLocalStorage(localStorageStore) {
-    Object.keys(localStorageStore).forEach((key) => {
+    Object.keys(localStorageStore).forEach(key => {
       window.localStorage.setItem(key, localStorageStore[key]);
     });
   }
@@ -56,7 +56,7 @@ function snapshotHelper(mode, browserSnapshotString) {
   if (mode === 'get') {
     const browserSnapshot = {
       sessionStorage: fetchSessionStorage(),
-      localStorage: fetchLocalStorage(),
+      localStorage: fetchLocalStorage()
     };
 
     const stringifiedBrowserSnapshot = JSON.stringify(browserSnapshot);

@@ -28,7 +28,7 @@ module.exports = async (state, { args: { inputKeys } }) => {
       arrowright: 'ArrowRight',
       arrowdown: 'ArrowDown',
       insert: 'Insert',
-      delete: 'Delete',
+      delete: 'Delete'
     };
 
     if (keys.length === 1) {
@@ -42,7 +42,7 @@ module.exports = async (state, { args: { inputKeys } }) => {
       return;
     }
 
-    const sequence = keys.map((key) => {
+    const sequence = keys.map(key => {
       const normalizedKey = key.toLowerCase();
       let keyCode = supportedKeys[normalizedKey];
 
@@ -54,7 +54,7 @@ module.exports = async (state, { args: { inputKeys } }) => {
         return {
           input: key,
           valid: true,
-          keyCode,
+          keyCode
         };
       }
       return { input: key, valid: false };
@@ -70,6 +70,6 @@ module.exports = async (state, { args: { inputKeys } }) => {
     //   return;
     // }
 
-    browser.keys(sequence.map((k) => k.keyCode));
+    browser.keys(sequence.map(k => k.keyCode));
   }
 };

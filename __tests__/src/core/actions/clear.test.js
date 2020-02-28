@@ -11,35 +11,39 @@ describe('clear action test suite', () => {
       browser: {
         getActiveElement: jest.fn(),
         elementClear: jest.fn(),
-        execute: jest.fn(),
-      },
+        execute: jest.fn()
+      }
     };
   });
 
   test('clear command with target type "input" should trigger the corresponding webdriver.io function to clear the currently active input element', async () => {
     const currentlyActiveElementId = uuid();
     state.browser.getActiveElement.mockResolvedValue({
-      ELEMENT: currentlyActiveElementId,
+      ELEMENT: currentlyActiveElementId
     });
     state.browser.elementClear.mockResolvedValue(true);
 
     await clear(state, { args: { what: 'input' } });
     expect(state.browser.getActiveElement).toHaveBeenCalled();
     expect(state.browser.elementClear).toHaveBeenCalled();
-    expect(state.browser.elementClear).toHaveBeenCalledWith(currentlyActiveElementId);
+    expect(state.browser.elementClear).toHaveBeenCalledWith(
+      currentlyActiveElementId
+    );
     expect(state.browser.execute).not.toHaveBeenCalled();
   });
 
   test('clear command with target type "text" should trigger the corresponding webdriver.io function to clear the currently active input element', async () => {
     const currentlyActiveElementId = uuid();
     state.browser.getActiveElement.mockResolvedValue({
-      ELEMENT: currentlyActiveElementId,
+      ELEMENT: currentlyActiveElementId
     });
 
     await clear(state, { args: { what: 'text' } });
     expect(state.browser.getActiveElement).toHaveBeenCalled();
     expect(state.browser.elementClear).toHaveBeenCalled();
-    expect(state.browser.elementClear).toHaveBeenCalledWith(currentlyActiveElementId);
+    expect(state.browser.elementClear).toHaveBeenCalledWith(
+      currentlyActiveElementId
+    );
     expect(state.browser.execute).not.toHaveBeenCalled();
   });
 
@@ -58,11 +62,17 @@ describe('clear action test suite', () => {
       await clear(state, { args: { what: uuid() } });
     } catch (err) {
       expect(err).toBeTruthy();
-      expect(err).toHaveProperty('message', 'Incorrect usage of command. Accepted parameters are, "text", "input" or "highlights"');
+      expect(err).toHaveProperty(
+        'message',
+        'Incorrect usage of command. Accepted parameters are, "text", "input" or "highlights"'
+      );
       expect(state.browser.getActiveElement).not.toHaveBeenCalled();
       expect(state.browser.elementClear).not.toHaveBeenCalled();
       expect(state.browser.execute).toHaveBeenCalled();
-      expect(logger.emitLogs).toHaveBeenCalledWith({ message: CLEAR_ERR, type: MESSAGE_TYPE.ERROR });
+      expect(logger.emitLogs).toHaveBeenCalledWith({
+        message: CLEAR_ERR,
+        type: MESSAGE_TYPE.ERROR
+      });
     }
   });
 });

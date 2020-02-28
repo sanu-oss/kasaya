@@ -2,9 +2,16 @@
 const webdriverio = require('webdriverio');
 const approot = require('app-root-path');
 const logger = require('../../utils/logger');
-const { MESSAGE_TYPE, BROWSER_LAUNCH_ERR, HEADLESS_MESSAGE } = require('../../constants');
+const {
+  MESSAGE_TYPE,
+  BROWSER_LAUNCH_ERR,
+  HEADLESS_MESSAGE
+} = require('../../constants');
 
-module.exports = async (state, { args: { browserName, extension, isHeadless } }) => {
+module.exports = async (
+  state,
+  { args: { browserName, extension, isHeadless } }
+) => {
   const options = {
     sync: true,
     capabilities: {
@@ -13,21 +20,26 @@ module.exports = async (state, { args: { browserName, extension, isHeadless } })
         args: [
           '--disable-infobars',
           '--start-maximized',
-          '--window-size=1920,1080',
-        ],
-      },
+          '--window-size=1920,1080'
+        ]
+      }
     },
     deprecationWarnings: false,
-    logLevel: 'silent',
+    logLevel: 'silent'
   };
 
   if (extension) {
-    options.capabilities['goog:chromeOptions'].args.push(`--load-extension=${approot.resolve(extension)}`);
+    options.capabilities['goog:chromeOptions'].args.push(
+      `--load-extension=${approot.resolve(extension)}`
+    );
   }
 
   if (isHeadless) {
     options.capabilities['goog:chromeOptions'].args.push('--headless');
-    logger.emitLogs({ message: HEADLESS_MESSAGE, type: MESSAGE_TYPE.PROCESSING });
+    logger.emitLogs({
+      message: HEADLESS_MESSAGE,
+      type: MESSAGE_TYPE.PROCESSING
+    });
   }
 
   let browser;

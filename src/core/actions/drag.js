@@ -5,11 +5,10 @@ const { buildRegexFromParamString } = require('../../utils/buildRegex');
 const { simulateDragDrop } = require('../../utils/browser/common');
 const { findElements } = require('../../utils/browser/elementFinder');
 
-module.exports = async (state, {
-  args: {
-    source, destination, sourceMarker, destinationMarker,
-  },
-}) => {
+module.exports = async (
+  state,
+  { args: { source, destination, sourceMarker, destinationMarker } }
+) => {
   const browser = validateBrowser(state);
 
   if (browser) {
@@ -19,7 +18,7 @@ module.exports = async (state, {
     const elementFinderOpts = {
       highlightMatches: false,
       returnMultiple: true,
-      innerHTMLOnly: false,
+      innerHTMLOnly: false
     };
 
     let sourceResults;
@@ -32,7 +31,7 @@ module.exports = async (state, {
           sourceMarker,
           elementFinderOpts.returnMultiple,
           elementFinderOpts.highlightMatches,
-          elementFinderOpts.innerHTMLOnly,
+          elementFinderOpts.innerHTMLOnly
         );
 
         return sourceResults.success === true;
@@ -49,7 +48,7 @@ module.exports = async (state, {
           destinationMarker,
           elementFinderOpts.returnMultiple,
           elementFinderOpts.highlightMatches,
-          elementFinderOpts.innerHTMLOnly,
+          elementFinderOpts.innerHTMLOnly
         );
 
         return destinationResults.success === true;
@@ -61,18 +60,35 @@ module.exports = async (state, {
     /**
      * TODO: select element based on the elementIndex
      */
-    if (sourceResults.success && destinationResults.success && sourceResults.targetResults.length > 0 && destinationResults.targetResults.length > 0) {
+    if (
+      sourceResults.success &&
+      destinationResults.success &&
+      sourceResults.targetResults.length > 0 &&
+      destinationResults.targetResults.length > 0
+    ) {
       const sourceElement = await browser.$(sourceResults.targetResults[0]);
-      const destinationElement = await browser.$(destinationResults.targetResults[0]);
+      const destinationElement = await browser.$(
+        destinationResults.targetResults[0]
+      );
 
       if (sourceElement && destinationElement) {
         try {
-          await browser.execute(simulateDragDrop, sourceElement, destinationElement);
+          await browser.execute(
+            simulateDragDrop,
+            sourceElement,
+            destinationElement
+          );
         } catch (err) {
-          return logger.emitLogs({ message: 'Drag action performed', type: MESSAGE_TYPE.INFO });
+          return logger.emitLogs({
+            message: 'Drag action performed',
+            type: MESSAGE_TYPE.INFO
+          });
         }
       } else {
-        return logger.emitLogs({ message: 'Something went wrong', type: MESSAGE_TYPE.ERROR });
+        return logger.emitLogs({
+          message: 'Something went wrong',
+          type: MESSAGE_TYPE.ERROR
+        });
       }
     }
   }

@@ -5,7 +5,7 @@ const path = require('path');
 const { validateBrowser } = require('../../utils/validate');
 const timeout = require('../../utils/timeout');
 
-const fetchCoverage = async (state) => {
+const fetchCoverage = async state => {
   const browser = validateBrowser(state);
 
   if (browser) {
@@ -23,7 +23,7 @@ const generateCoverage = async (coverageArray, coverage, scriptPath) => {
   // wait till the `command` listener is finished
   await timeout(1000);
   if (coverageArray) {
-    coverageArray.forEach((obj) => {
+    coverageArray.forEach(obj => {
       coverageMap.merge(obj);
     });
     const reporter = istanbulApi.createReporter();

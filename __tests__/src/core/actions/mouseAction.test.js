@@ -2,11 +2,15 @@ const { when } = require('jest-when');
 const uuid = require('uuid/v4');
 const store = require('../../../../src/core/helpers/dataStore').store();
 const logger = require('../../../../src/utils/logger');
-const { getCrossElements } = require('../../../../src/utils/browser/gridFinder');
+const {
+  getCrossElements
+} = require('../../../../src/utils/browser/gridFinder');
 const { findElements } = require('../../../../src/utils/browser/elementFinder');
 const { highlightMatches } = require('../../../../src/utils/browser/common');
 const click = require('../../../../src/core/actions/mouseActions');
-const { buildRegexFromParamString } = require('../../../../src/utils/buildRegex');
+const {
+  buildRegexFromParamString
+} = require('../../../../src/utils/buildRegex');
 const { eraseHighlights } = require('../../../../src/utils/browser/eraser');
 const { MESSAGE_TYPE } = require('../../../../src/constants');
 
@@ -21,15 +25,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid()],
+          targetResults: [uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -40,7 +44,14 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionClick).toHaveBeenCalled();
   });
@@ -55,15 +66,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -75,7 +86,14 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector, elementIndex } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionClick).toHaveBeenCalled();
   });
@@ -90,15 +108,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionDoubleClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -108,9 +126,20 @@ describe('mouse action test suite', () => {
     const innerHTMLOnly = false;
     const parsedSelector = buildRegexFromParamString(selector);
 
-    await click(state, { doubleClick: true }, { args: { selector, elementIndex } });
+    await click(
+      state,
+      { doubleClick: true },
+      { args: { selector, elementIndex } }
+    );
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionDoubleClick).toHaveBeenCalled();
   });
@@ -125,14 +154,14 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -144,7 +173,14 @@ describe('mouse action test suite', () => {
 
     await click(state, { hover: true }, { args: { selector, elementIndex } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
   });
 
@@ -158,15 +194,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn(), positionClick: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -176,9 +212,20 @@ describe('mouse action test suite', () => {
     const innerHTMLOnly = false;
     const parsedSelector = buildRegexFromParamString(selector);
 
-    await click(state, { rightClick: true }, { args: { selector, elementIndex } });
+    await click(
+      state,
+      { rightClick: true },
+      { args: { selector, elementIndex } }
+    );
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(element.positionClick).toHaveBeenCalledWith(2);
   });
@@ -193,15 +240,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn(), positionClick: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -211,9 +258,20 @@ describe('mouse action test suite', () => {
     const innerHTMLOnly = false;
     const parsedSelector = buildRegexFromParamString(selector);
 
-    await click(state, { middleClick: true }, { args: { selector, elementIndex } });
+    await click(
+      state,
+      { middleClick: true },
+      { args: { selector, elementIndex } }
+    );
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(element.positionClick).toHaveBeenCalledWith(1);
   });
@@ -228,15 +286,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: false,
-          code: 'TARGET_NOT_FOUND',
+          code: 'TARGET_NOT_FOUND'
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -247,8 +305,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `Could not locate an element matching text "${selector}"`, type: MESSAGE_TYPE.ERROR });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `Could not locate an element matching text "${selector}"`,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 
   test('mouse action should log a specific question and return if more than one elements found matching the provided selector when marker and elementIndex parameters are not present', async () => {
@@ -261,15 +329,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -280,8 +348,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `We found more than one result matching your search criteria. Please use "near" keyword to limit the search, or specify what you want to click as follows:\n\tclick "${selector}" <index>\n`, type: MESSAGE_TYPE.QUESTION });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `We found more than one result matching your search criteria. Please use "near" keyword to limit the search, or specify what you want to click as follows:\n\tclick "${selector}" <index>\n`,
+      type: MESSAGE_TYPE.QUESTION
+    });
   });
 
   test('mouse action should log a specific question and return if more than one elements found matching the provided selector and marker, when elementIndex is not present', async () => {
@@ -294,15 +372,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid(), uuid(), uuid()],
+          targetResults: [uuid(), uuid(), uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -315,8 +393,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector, marker } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, parsedMarker, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `We found more than one result matching your search criteria. Please specify what you want to click as follows:\n\tclick "${selector}" <index> near ${marker}\n`, type: MESSAGE_TYPE.QUESTION });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      parsedMarker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `We found more than one result matching your search criteria. Please specify what you want to click as follows:\n\tclick "${selector}" <index> near ${marker}\n`,
+      type: MESSAGE_TYPE.QUESTION
+    });
   });
 
   test('mouse action should log a specific error and return if more than one marker elements found matching the provided marker', async () => {
@@ -329,15 +417,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: false,
-          code: 'MULTIPLE_BASE_ELEMENTS',
+          code: 'MULTIPLE_BASE_ELEMENTS'
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -350,8 +438,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector, marker } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, parsedMarker, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `Found more than one elements matching text "${marker}". Try using a unique text after 'near' keyword.`, type: MESSAGE_TYPE.ERROR });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      parsedMarker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `Found more than one elements matching text "${marker}". Try using a unique text after 'near' keyword.`,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 
   // test('mouse action should log xpaths of all the elements found matching the marker text if multiple markers found and the DEV_MODE env variable is set to 1', async () => {
@@ -371,15 +469,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: false,
-          code: 'BASE_ELEMENT_NOT_FOUND',
+          code: 'BASE_ELEMENT_NOT_FOUND'
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -392,8 +490,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector, marker } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, parsedMarker, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `Could not locate an element matching text "${marker}"`, type: MESSAGE_TYPE.ERROR });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      parsedMarker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `Could not locate an element matching text "${marker}"`,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 
   test('mouse action should log a specific error message if the target element could not be found due to an unknown reason', async () => {
@@ -401,15 +509,15 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: false,
-          code: 'UNKNOWN_ERROR',
+          code: 'UNKNOWN_ERROR'
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -422,8 +530,18 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector, marker } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, parsedMarker, returnMultiple, highlightMatch, innerHTMLOnly);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: 'Could not locate your element due to an unknown reason', type: MESSAGE_TYPE.ERROR });
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      parsedMarker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: 'Could not locate your element due to an unknown reason',
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 
   // test('mouse action should log the xpath(s) of the element(s) which was/were identified by the element finder when the DEV_MODE env variable is set to 1', async () => {
@@ -436,16 +554,16 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [uuid()],
+          targetResults: [uuid()]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
         getWindowHandles: jest.fn(),
-        switchToWindow: jest.fn(),
-      },
+        switchToWindow: jest.fn()
+      }
     };
     logger.emitLogs = jest.fn();
     const selector = uuid();
@@ -453,11 +571,20 @@ describe('mouse action test suite', () => {
     const highlightMatch = false;
     const innerHTMLOnly = false;
     const parsedSelector = buildRegexFromParamString(selector);
-    state.browser.getWindowHandles.mockResolvedValueOnce([uuid()]).mockResolvedValueOnce([uuid(), uuid()]);
+    state.browser.getWindowHandles
+      .mockResolvedValueOnce([uuid()])
+      .mockResolvedValueOnce([uuid(), uuid()]);
 
     await click(state, { click: true }, { args: { selector } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.switchToWindow).toHaveBeenCalled();
   });
@@ -467,13 +594,13 @@ describe('mouse action test suite', () => {
     const browserHandlers = [uuid()];
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn(),
         $: jest.fn().mockResolvedValue(element),
         getElementText: jest.fn().mockResolvedValue(uuid()),
         getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-        positionClick: jest.fn(),
-      },
+        positionClick: jest.fn()
+      }
     };
     logger.emitLogs = jest.fn();
     store.setGlobal = jest.fn();
@@ -482,11 +609,21 @@ describe('mouse action test suite', () => {
     const rowXpath = [uuid()];
     const columnXpath = [uuid()];
     const crossElementXpaths = [uuid()];
-    when(state.browser.execute).calledWith(findElements, rowText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: rowXpath });
-    when(state.browser.execute).calledWith(findElements, columnText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: columnXpath });
-    when(state.browser.execute).calledWith(getCrossElements, rowXpath[0], columnXpath[0]).mockResolvedValue({ success: true, targetResults: crossElementXpaths });
+    when(state.browser.execute)
+      .calledWith(findElements, rowText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: rowXpath });
+    when(state.browser.execute)
+      .calledWith(findElements, columnText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: columnXpath });
+    when(state.browser.execute)
+      .calledWith(getCrossElements, rowXpath[0], columnXpath[0])
+      .mockResolvedValue({ success: true, targetResults: crossElementXpaths });
 
-    await click(state, { click: true }, { args: { row: rowText, column: columnText } });
+    await click(
+      state,
+      { click: true },
+      { args: { row: rowText, column: columnText } }
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionClick).toHaveBeenCalled();
   });
@@ -496,13 +633,13 @@ describe('mouse action test suite', () => {
     const browserHandlers = [uuid()];
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn(),
         $: jest.fn().mockResolvedValue(element),
         getElementText: jest.fn().mockResolvedValue(uuid()),
         getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-        positionClick: jest.fn(),
-      },
+        positionClick: jest.fn()
+      }
     };
     logger.emitLogs = jest.fn();
     store.setGlobal = jest.fn();
@@ -511,13 +648,29 @@ describe('mouse action test suite', () => {
     const rowXpath = [uuid()];
     const columnXpath = [uuid()];
     const crossElementXpaths = [uuid(), uuid()];
-    when(state.browser.execute).calledWith(findElements, rowText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: rowXpath });
-    when(state.browser.execute).calledWith(findElements, columnText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: columnXpath });
-    when(state.browser.execute).calledWith(getCrossElements, rowXpath[0], columnXpath[0]).mockResolvedValue({ success: true, targetResults: crossElementXpaths });
+    when(state.browser.execute)
+      .calledWith(findElements, rowText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: rowXpath });
+    when(state.browser.execute)
+      .calledWith(findElements, columnText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: columnXpath });
+    when(state.browser.execute)
+      .calledWith(getCrossElements, rowXpath[0], columnXpath[0])
+      .mockResolvedValue({ success: true, targetResults: crossElementXpaths });
 
-    await click(state, { click: true }, { args: { row: rowText, column: columnText } });
-    expect(state.browser.execute).toHaveBeenCalledWith(highlightMatches, crossElementXpaths);
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: `We found more than one result matching your search criteria. Specify what you want to click as follows:\n\tclick on row ${rowText} column ${columnText} <index>\n`, type: MESSAGE_TYPE.QUESTION });
+    await click(
+      state,
+      { click: true },
+      { args: { row: rowText, column: columnText } }
+    );
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      highlightMatches,
+      crossElementXpaths
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: `We found more than one result matching your search criteria. Specify what you want to click as follows:\n\tclick on row ${rowText} column ${columnText} <index>\n`,
+      type: MESSAGE_TYPE.QUESTION
+    });
   });
 
   test('mouse actions should click on element by row column selection when index is provided', async () => {
@@ -525,13 +678,13 @@ describe('mouse action test suite', () => {
     const browserHandlers = [uuid()];
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn(),
         $: jest.fn().mockResolvedValue(element),
         getElementText: jest.fn().mockResolvedValue(uuid()),
         getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-        positionClick: jest.fn(),
-      },
+        positionClick: jest.fn()
+      }
     };
     logger.emitLogs = jest.fn();
     store.setGlobal = jest.fn();
@@ -540,11 +693,21 @@ describe('mouse action test suite', () => {
     const rowXpath = [uuid()];
     const columnXpath = [uuid()];
     const crossElementXpaths = [uuid(), uuid()];
-    when(state.browser.execute).calledWith(findElements, rowText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: rowXpath });
-    when(state.browser.execute).calledWith(findElements, columnText, undefined, true, false, true).mockResolvedValue({ success: true, targetResults: columnXpath });
-    when(state.browser.execute).calledWith(getCrossElements, rowXpath[0], columnXpath[0]).mockResolvedValue({ success: true, targetResults: crossElementXpaths });
+    when(state.browser.execute)
+      .calledWith(findElements, rowText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: rowXpath });
+    when(state.browser.execute)
+      .calledWith(findElements, columnText, undefined, true, false, true)
+      .mockResolvedValue({ success: true, targetResults: columnXpath });
+    when(state.browser.execute)
+      .calledWith(getCrossElements, rowXpath[0], columnXpath[0])
+      .mockResolvedValue({ success: true, targetResults: crossElementXpaths });
 
-    await click(state, { click: true }, { args: { row: rowText, column: columnText, elementIndex: 1 } });
+    await click(
+      state,
+      { click: true },
+      { args: { row: rowText, column: columnText, elementIndex: 1 } }
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionClick).toHaveBeenCalled();
   });
@@ -560,19 +723,21 @@ describe('mouse action test suite', () => {
     const element = { moveTo: jest.fn() };
     const state = {
       browser: {
-        waitUntil: jest.fn((fn) => fn()),
+        waitUntil: jest.fn(fn => fn()),
         execute: jest.fn().mockResolvedValue({
           success: true,
-          targetResults: [valueInStore],
+          targetResults: [valueInStore]
         }),
         $: jest.fn().mockResolvedValue(element),
         positionClick: jest.fn(),
-        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers),
-      },
+        getWindowHandles: jest.fn().mockResolvedValue(browserHandlers)
+      }
     };
     store.getGlobal = jest.fn();
     logger.emitLogs = jest.fn();
-    when(store.getGlobal).calledWith(storeKey).mockReturnValue(valueInStore);
+    when(store.getGlobal)
+      .calledWith(storeKey)
+      .mockReturnValue(valueInStore);
 
     const selector = storeKey;
     const returnMultiple = true;
@@ -582,7 +747,14 @@ describe('mouse action test suite', () => {
 
     await click(state, { click: true }, { args: { selector } });
     expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
-    expect(state.browser.execute).toHaveBeenCalledWith(findElements, parsedSelector, undefined, returnMultiple, highlightMatch, innerHTMLOnly);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly
+    );
     expect(element.moveTo).toHaveBeenCalled();
     expect(state.browser.positionClick).toHaveBeenCalled();
   });

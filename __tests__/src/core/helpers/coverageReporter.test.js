@@ -1,4 +1,6 @@
-const { fetchCoverage } = require('../../../../src/core/helpers/coverageReporter');
+const {
+  fetchCoverage
+} = require('../../../../src/core/helpers/coverageReporter');
 const store = require('../../../../src/core/helpers/dataStore').store();
 const logger = require('../../../../src/utils/logger');
 
@@ -7,8 +9,8 @@ describe('coverage reporter test suite', () => {
     const mockSnapshot = { coverage: 'coverage_object' };
     const state = {
       browser: {
-        execute: jest.fn().mockResolvedValue(mockSnapshot),
-      },
+        execute: jest.fn().mockResolvedValue(mockSnapshot)
+      }
     };
     store.setGlobal = jest.fn();
     logger.emitLogs = jest.fn();
@@ -21,9 +23,9 @@ describe('coverage reporter test suite', () => {
     const mockSnapshot = { coverage: 'coverage_object' };
     const state = {
       browser: {
-        execute: jest.fn().mockResolvedValue(mockSnapshot),
+        execute: jest.fn().mockResolvedValue(mockSnapshot)
       },
-      coverage: [{}],
+      coverage: [{}]
     };
     store.setGlobal = jest.fn();
     logger.emitLogs = jest.fn();

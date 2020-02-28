@@ -7,7 +7,9 @@ function replaceParamsWith(paramString, paramReplacer) {
   const tokens = paramString.split(tokenFormatRegex);
   return tokens.reduce((out, curr) => {
     if (/^\$\{[a-zA-Z][0-9a-zA-Z_]*\}$/.test(curr)) {
-      return out + curr.replace(/^\$\{([a-zA-Z][0-9a-zA-Z_]*)\}$/g, paramReplacer);
+      return (
+        out + curr.replace(/^\$\{([a-zA-Z][0-9a-zA-Z_]*)\}$/g, paramReplacer)
+      );
     }
     return out + escapeStringRegexp(curr);
   }, '');
@@ -37,7 +39,11 @@ function buildRegexEscapedString(text) {
 function extractParamsFromText(text, extractionString) {
   const namedRegex = buildNamedRegexFromParamString(extractionString);
   const result = parseRegex(text, namedRegex);
-  return pickBy(result, (value, attr) => Number.isNaN(Number(attr)) && !['index', 'input'].includes(attr));
+  return pickBy(
+    result,
+    (value, attr) =>
+      Number.isNaN(Number(attr)) && !['index', 'input'].includes(attr)
+  );
 }
 
 function extractArgumentsFromText(argumentString) {
@@ -51,7 +57,7 @@ function extractArgumentsFromText(argumentString) {
 
 function extractArgumentsFromObject(argumentObject) {
   if (argumentObject) {
-    return Object.keys(argumentObject).map((key) => argumentObject[key]);
+    return Object.keys(argumentObject).map(key => argumentObject[key]);
   }
 }
 
@@ -61,5 +67,5 @@ module.exports = {
   buildNamedRegexFromParamString,
   extractParamsFromText,
   extractArgumentsFromText,
-  extractArgumentsFromObject,
+  extractArgumentsFromObject
 };

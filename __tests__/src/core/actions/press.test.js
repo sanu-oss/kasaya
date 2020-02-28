@@ -25,21 +25,21 @@ const supportedKeys = {
   arrowright: 'ArrowRight',
   arrowdown: 'ArrowDown',
   insert: 'Insert',
-  delete: 'Delete',
+  delete: 'Delete'
 };
 
 describe('press command test suite', () => {
   beforeEach(() => {
     state = {
       browser: {
-        keys: jest.fn(),
-      },
+        keys: jest.fn()
+      }
     };
   });
 
   test('press function should simulate key press, if only one supported key is passed', async () => {
     state.browser.keys.mockResolvedValue(true);
-    Object.keys(supportedKeys).forEach(async (key) => {
+    Object.keys(supportedKeys).forEach(async key => {
       await press(state, { args: { inputKeys: key } });
       expect(state.browser.keys).toHaveBeenCalledWith(supportedKeys[key]);
     });
@@ -49,7 +49,11 @@ describe('press command test suite', () => {
     state.browser.keys.mockResolvedValue(true);
 
     await press(state, { args: { inputKeys: 'Backspace+Enter' } });
-    expect(state.browser.keys).toHaveBeenCalledWith(['Backspace', 'Enter', 'NULL']);
+    expect(state.browser.keys).toHaveBeenCalledWith([
+      'Backspace',
+      'Enter',
+      'NULL'
+    ]);
   });
 
   test('press function should simulate key press, if only one unsupported key is passed', async () => {

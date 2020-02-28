@@ -1,7 +1,11 @@
 const { eraseHighlights } = require('../../utils/browser/eraser');
 const { validateBrowser } = require('../../utils/validate');
 const logger = require('../../utils/logger');
-const { CLEAR_ERR, MESSAGE_TYPE, ELEMENT_CLEAR_ERR } = require('../../constants');
+const {
+  CLEAR_ERR,
+  MESSAGE_TYPE,
+  ELEMENT_CLEAR_ERR
+} = require('../../constants');
 
 module.exports = async (state, { args: { what } }) => {
   const browser = validateBrowser(state);
@@ -20,7 +24,10 @@ module.exports = async (state, { args: { what } }) => {
           return;
         }
         default: {
-          return logger.emitLogs({ message: CLEAR_ERR, type: MESSAGE_TYPE.ERROR });
+          return logger.emitLogs({
+            message: CLEAR_ERR,
+            type: MESSAGE_TYPE.ERROR
+          });
         }
       }
     } catch (err) {

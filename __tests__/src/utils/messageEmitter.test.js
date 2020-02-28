@@ -1,7 +1,14 @@
 /* eslint no-console: "off" */
 const chalk = require('chalk');
 const {
-  emitError, emitSuccess, emitInProgress, emitQuestion, emitUsageHelp, emitPlainText, emitInfo, emitWarn,
+  emitError,
+  emitSuccess,
+  emitInProgress,
+  emitQuestion,
+  emitUsageHelp,
+  emitPlainText,
+  emitInfo,
+  emitWarn
 } = require('./../../../src/utils/messageEmitter');
 
 describe('messageEmitter module test suite', () => {
@@ -65,9 +72,11 @@ describe('messageEmitter module test suite', () => {
     console.log = jest.fn();
 
     emitUsageHelp('baseCommand', 'description', 'message');
-    expect(console.log).toHaveBeenCalledWith(chalk.grey(`Usage: 
+    expect(console.log).toHaveBeenCalledWith(
+      chalk.grey(`Usage: 
         baseCommand - description
         message
-        `));
+        `)
+    );
   });
 });

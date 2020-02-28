@@ -1,7 +1,10 @@
 const Terminal = require('../utils/terminal');
 const messageEmitter = require('../utils/messageEmitter');
 const {
-  MODES, MESSAGE_TYPE, ASSERTION, INVALID_MODE,
+  MODES,
+  MESSAGE_TYPE,
+  ASSERTION,
+  INVALID_MODE
 } = require('../constants');
 
 /**

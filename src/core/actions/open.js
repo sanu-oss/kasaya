@@ -9,7 +9,7 @@ module.exports = async (state, { isNewTab }, { args: { url } }) => {
     const { protocol, path } = parseRegex(
       url,
       '((?<protocol>http|https)://)?(?<path>.+)',
-      'i',
+      'i'
     );
     if (protocol) {
       navigateUrl = `${protocol}://${path}`;

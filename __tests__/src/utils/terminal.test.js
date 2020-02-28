@@ -1,7 +1,13 @@
 /* eslint no-console: "off" */
 const readline = require('readline');
 const {
-  init, promptQuestion, listen, execute, setMode, getMode, prompt,
+  init,
+  promptQuestion,
+  listen,
+  execute,
+  setMode,
+  getMode,
+  prompt
 } = require('../../../src/utils/terminal');
 
 describe('terminal test suite', () => {
@@ -50,7 +56,9 @@ describe('terminal test suite', () => {
     const defaultAnswer = 'No';
     readLineInterface.question = jest.fn((state, fn) => fn());
 
-    const returnedAnswer = await promptQuestion('Do you wish to continue?', { default: defaultAnswer });
+    const returnedAnswer = await promptQuestion('Do you wish to continue?', {
+      default: defaultAnswer
+    });
     expect(readLineInterface.question).toHaveBeenCalled();
     expect(returnedAnswer).toBe(returnedAnswer);
   });

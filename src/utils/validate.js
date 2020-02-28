@@ -1,6 +1,6 @@
 const messageEmitter = require('./messageEmitter');
 
-const validateBrowser = (state) => {
+const validateBrowser = state => {
   if (!state || !state.browser) {
     messageEmitter.emitError('No browser session found.!');
     return undefined;
@@ -9,5 +9,5 @@ const validateBrowser = (state) => {
 };
 
 module.exports = {
-  validateBrowser,
+  validateBrowser
 };

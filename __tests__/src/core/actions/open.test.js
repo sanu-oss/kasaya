@@ -5,8 +5,8 @@ describe('open action test suite', () => {
   test('open action should trigger the corresponding webdriver.io function to open the provided url with protocol', async () => {
     const state = {
       browser: {
-        url: jest.fn(),
-      },
+        url: jest.fn()
+      }
     };
     const path = uuid();
     const url = `https://${path}`;
@@ -18,8 +18,8 @@ describe('open action test suite', () => {
   test('open action should trigger the corresponding webdriver.io function to open the provided url without protocol', async () => {
     const state = {
       browser: {
-        url: jest.fn(),
-      },
+        url: jest.fn()
+      }
     };
     const url = uuid();
 
@@ -30,8 +30,8 @@ describe('open action test suite', () => {
   test('open action should trigger the corresponding webdriver.io function to open the provided url with protocol in a new tab', async () => {
     const state = {
       browser: {
-        newWindow: jest.fn(),
-      },
+        newWindow: jest.fn()
+      }
     };
     const path = uuid();
     const url = `https://${path}`;
@@ -43,8 +43,8 @@ describe('open action test suite', () => {
   test('open action should trigger the corresponding webdriver.io function to open the provided url without protocol in a new tab', async () => {
     const state = {
       browser: {
-        newWindow: jest.fn(),
-      },
+        newWindow: jest.fn()
+      }
     };
     const url = uuid();
 

@@ -22,25 +22,25 @@ const installDrivers = promisify(selenium.install);
           // https://chromedriver.storage.googleapis.com/index.html
           version: config.drivers.chrome.version,
           arch: process.arch,
-          baseURL: 'https://chromedriver.storage.googleapis.com',
+          baseURL: 'https://chromedriver.storage.googleapis.com'
         },
         firefox: {
           // check for more recent versions of chrome driver here:
           // https://github.com/mozilla/geckodriver/releases
           version: config.drivers.firefox.version,
           arch: process.arch,
-          baseURL: 'https://github.com/mozilla/geckodriver/releases/download',
-        },
+          baseURL: 'https://github.com/mozilla/geckodriver/releases/download'
+        }
       },
       requestOpts: {
         // see https://github.com/request/request#requestoptions-callback
-        timeout: 10000,
-      },
+        timeout: 10000
+      }
     });
     console.log('installation is complete');
   } catch (e) {
     console.log(
-      chalk.red('Error while setting up Selenium or Browser driver:', e.message),
+      chalk.red('Error while setting up Selenium or Browser driver:', e.message)
     );
     process.exit(-1);
   }

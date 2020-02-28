@@ -8,8 +8,8 @@ describe('go command test suite', () => {
     state = {
       browser: {
         forward: jest.fn(),
-        back: jest.fn(),
-      },
+        back: jest.fn()
+      }
     };
   });
 
@@ -33,6 +33,9 @@ describe('go command test suite', () => {
     logger.emitLogs = jest.fn();
 
     await go(state, { args: { direction: 'wrong value' } });
-    expect(logger.emitLogs).toHaveBeenCalledWith({ message: NAVIGATION_ERR, type: MESSAGE_TYPE.ERROR });
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: NAVIGATION_ERR,
+      type: MESSAGE_TYPE.ERROR
+    });
   });
 });

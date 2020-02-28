@@ -16,7 +16,10 @@ module.exports = async (state, { args: { direction } }) => {
         break;
       }
       default: {
-        return logger.emitLogs({ message: NAVIGATION_ERR, type: MESSAGE_TYPE.ERROR });
+        return logger.emitLogs({
+          message: NAVIGATION_ERR,
+          type: MESSAGE_TYPE.ERROR
+        });
       }
     }
   }
