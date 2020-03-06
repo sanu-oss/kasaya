@@ -3,6 +3,11 @@ const { when } = require('jest-when');
 const assert = require('../../../../src/core/actions/assert').common;
 const store = require('../../../../src/core/helpers/dataStore').store();
 const logger = require('../../../../src/utils/logger');
+const { findElements } = require('../../../../src/utils/browser/elementFinder');
+const { buildRegexFromParamString } = require('../../../../src/utils/buildRegex');
+const { eraseHighlights } = require('../../../../src/utils/browser/eraser');
+const { checkElementAvailability } = require('../../../../src/core/actions/assert');
+
 const sampleResp = require('../../../__mocks__/sampleResp.json');
 const { ASSERTION, MESSAGE_TYPE } = require('../../../../src/constants');
 
@@ -175,5 +180,260 @@ describe('assert action test suite', () => {
     expect(store.getGlobal).toHaveBeenCalledTimes(1);
     expect(store.getGlobal).toHaveBeenCalledWith(storeKey);
     expect(logger.emitLogs).toHaveBeenCalledWith({ message: ASSERTION.FAIL, type: MESSAGE_TYPE.INFO });
+  });
+
+  test('assert command should emit an information message with text "TRUE" if the "is available" assertion is true when accessing object properties', async () => {
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(true),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    when(element.isDisplayed)
+      .calledWith()
+      .mockReturnValue(true);
+
+    const selector = uuid();
+    const parsedSelector = buildRegexFromParamString(selector);
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+    logger.emitLogs = jest.fn();
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: true,
+      },
+      {
+        args: {
+          selector,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.PASS,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
+
+  test('assert command should emit an information message with text "TRUE" if the "is not available" assertion is true when accessing object properties', async () => {
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(false),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const selector = uuid();
+    const parsedSelector = buildRegexFromParamString(selector);
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+    logger.emitLogs = jest.fn();
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: false,
+      },
+      {
+        args: {
+          selector,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      undefined,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.PASS,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
+
+  test('assert command should emit an information message with text "TRUE" if the "is available" assertion is true when accessing object properties near marker', async () => {
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(true),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const selector = uuid();
+    const parsedSelector = buildRegexFromParamString(selector);
+    const marker = uuid();
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+    logger.emitLogs = jest.fn();
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: true,
+      },
+      {
+        args: {
+          selector,
+          marker,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      marker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.PASS,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
+
+  test('assert command should emit an information message with text "TRUE" if the "is not available" assertion is true when accessing object properties near marker', async () => {
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(false),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const selector = uuid();
+    const parsedSelector = buildRegexFromParamString(selector);
+    const marker = uuid();
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+    logger.emitLogs = jest.fn();
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: false,
+      },
+      {
+        args: {
+          selector,
+          marker,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      marker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.PASS,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
+
+  test('assert command should emit an information message with text "FALSE" if the "is not available" assertion is false when accessing object properties near marker', async () => {
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(true),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const selector = uuid();
+    const parsedSelector = buildRegexFromParamString(selector);
+    const marker = uuid();
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+    logger.emitLogs = jest.fn();
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: false,
+      },
+      {
+        args: {
+          selector,
+          marker,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      marker,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.FAIL,
+      type: MESSAGE_TYPE.INFO,
+    });
   });
 });

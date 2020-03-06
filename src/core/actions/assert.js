@@ -193,7 +193,7 @@ const checkElementStatus = async (state, {
   }
 };
 
-const checkElementAvailability = async (state, { isAvailable }, { args: { selector } }) => {
+const checkElementAvailability = async (state, { isAvailable }, { args: { selector, marker } }) => {
   const browser = await validateBrowser(state);
   if (browser) {
     if (selector) {
@@ -213,7 +213,7 @@ const checkElementAvailability = async (state, { isAvailable }, { args: { select
           result = await browser.execute(
             findElements,
             selectorText,
-            undefined,
+            marker,
             elementFinderOpts.returnMultiple,
             elementFinderOpts.highlightMatches,
             elementFinderOpts.innerHTMLOnly,

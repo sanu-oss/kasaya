@@ -397,6 +397,22 @@ app.addCommand({
   handler: assert.checkElementAvailability.bind(null, state, { isAvailable: false }),
 });
 app.addCommand({
+  command: 'check if $selector near $marker is available',
+  help:
+    'check if "Out of Stock" near "Products" is available - Checks if "Out of Stock" near "Products" is within current window',
+  handler: assert.checkElementAvailability.bind(null, state, {
+    isAvailable: true,
+  }),
+});
+app.addCommand({
+  command: 'check if $selector near $marker is not available',
+  help:
+    'check if "Out of Stock" near "Products" is not available - Checks if "Out of Stock" near "Products" is not within current window',
+  handler: assert.checkElementAvailability.bind(null, state, {
+    isAvailable: false,
+  }),
+});
+app.addCommand({
   command: 'check if $actualVal is $expectedVal',
   help: 'check if $age is "25" - Checks whether a given value is equal to a previously saved value',
   handler: assert.common,
