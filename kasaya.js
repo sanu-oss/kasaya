@@ -39,6 +39,7 @@ const coverageReporter = require('./src/core/helpers/coverageReporter');
 const snapshot = require('./src/core/actions/snapshot');
 const execute = require('./src/core/actions/execute');
 const help = require('./src/core/actions/help');
+const screenshot = require('./src/core/actions/screenshot');
 
 const app = new Jarvis();
 
@@ -599,6 +600,11 @@ app.addCommand({
   aliases: ['quit', 'q'],
   help: 'exit - Exits `Kasāya` prompt',
   handler: exit.bind(null, state),
+});
+app.addCommand({
+  command: 'screenshot $output',
+  help: 'screenshot "website.png" - saves a screenshot to file (only png)',
+  handler: screenshot.bind(null, state),
 });
 
 app.on('command', async ({ command, response }) => {
