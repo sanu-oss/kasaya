@@ -197,10 +197,6 @@ describe('assert action test suite', () => {
       },
     };
 
-    when(element.isDisplayed)
-      .calledWith()
-      .mockReturnValue(true);
-
     const selector = uuid();
     const parsedSelector = buildRegexFromParamString(selector);
     const returnMultiple = true;
