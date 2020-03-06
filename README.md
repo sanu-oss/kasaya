@@ -157,7 +157,7 @@ Get Visual Studio Code extension for Kasāya scripting from [here](https://githu
 
 ## Where does the name "Kasaya" come from?
 
-We noticed that many a test tool is named after brewed drinks ("Mocha", "Chai", "Espresso"). "Kasaya" (pronounced kʌsɑːjəˈ, or Kuh-SAA-yuh, "කසාය") is also a brewed drink -- it is an Ayurvedic medicinal drink popular is Sri Lanka (better known in India as https://en.wikipedia.org/wiki/Kashayam).
+We noticed that many a test tool is named after brewed drinks ("Mocha", "Chai", "Espresso"). "Kasaya" (pronounced kʌsɑːjəˈ, or Kuh-SAA-yuh, "කසාය") is also a brewed drink -- it is an Ayurvedic medicinal drink popular in Sri Lanka (better known in India as https://en.wikipedia.org/wiki/Kashayam).
 
 ## What's different about Kasaya?
 
