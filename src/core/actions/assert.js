@@ -203,7 +203,17 @@ const checkElementAvailability = async (state, { isAvailable }, { args: { select
         innerHTMLOnly: false,
       };
 
-      const selectorText = buildRegexFromParamString(selector);
+      const inputs = { selector, marker };
+
+      Object.keys(inputs).forEach((key) => {
+        if (inputs[key] && inputs[key].match(/^\$(?:\w*)/)) {
+          inputs[key] = store.getGlobal(inputs[key]);
+        }
+      });
+      const selectorValue = inputs.selector;
+      const markerValue = inputs.marker;
+
+      const selectorText = buildRegexFromParamString(selectorValue);
       await browser.execute(eraseHighlights);
 
       let result;
@@ -213,7 +223,7 @@ const checkElementAvailability = async (state, { isAvailable }, { args: { select
           result = await browser.execute(
             findElements,
             selectorText,
-            marker,
+            markerValue,
             elementFinderOpts.returnMultiple,
             elementFinderOpts.highlightMatches,
             elementFinderOpts.innerHTMLOnly,

@@ -432,4 +432,120 @@ describe('assert action test suite', () => {
       type: MESSAGE_TYPE.INFO,
     });
   });
+
+  test('assert command should emit an information message with text "TRUE" if the "is available" assertion is true when accessing object properties near a marker, using the variable references', async () => {
+    const storeKeySelector = `$${uuid()}`;
+    const storeKeyMarker = `$${uuid()}`;
+
+    const selectorValueInStore = uuid();
+    const markerValueInStore = uuid();
+
+    store.getGlobal = jest.fn();
+    logger.emitLogs = jest.fn();
+    when(store.getGlobal).calledWith(storeKeySelector).mockReturnValue(selectorValueInStore);
+    when(store.getGlobal).calledWith(storeKeyMarker).mockReturnValue(markerValueInStore);
+
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(true),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const parsedSelector = buildRegexFromParamString(selectorValueInStore);
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: true,
+      },
+      {
+        args: {
+          selector: storeKeySelector,
+          marker: storeKeyMarker,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      markerValueInStore,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.PASS,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
+
+  test('assert command should emit an information message with text "FALSE" if the "is available" assertion is false when accessing object properties near a marker when only the marker is referencing a variable', async () => {
+    const storeKeyMarker = `$${uuid()}`;
+
+    const selector = uuid();
+    const markerValueInStore = uuid();
+
+    store.getGlobal = jest.fn();
+    logger.emitLogs = jest.fn();
+    when(store.getGlobal).calledWith(storeKeyMarker).mockReturnValue(markerValueInStore);
+
+    const element = {
+      isDisplayed: jest.fn().mockResolvedValue(true),
+    };
+    const state = {
+      browser: {
+        waitUntil: jest.fn((fn) => fn()),
+        execute: jest.fn().mockResolvedValue({
+          success: true,
+          targetResults: [uuid()],
+        }),
+        $: jest.fn().mockResolvedValue(element),
+      },
+    };
+
+    const parsedSelector = buildRegexFromParamString(selector);
+    const returnMultiple = true;
+    const highlightMatch = false;
+    const innerHTMLOnly = false;
+
+    await checkElementAvailability(
+      state,
+      {
+        isAvailable: false,
+      },
+      {
+        args: {
+          selector,
+          marker: storeKeyMarker,
+        },
+      },
+    );
+
+    expect(state.browser.execute).toHaveBeenCalledWith(eraseHighlights);
+    expect(state.browser.execute).toHaveBeenCalledWith(
+      findElements,
+      parsedSelector,
+      markerValueInStore,
+      returnMultiple,
+      highlightMatch,
+      innerHTMLOnly,
+    );
+    expect(logger.emitLogs).toHaveBeenCalledWith({
+      message: ASSERTION.FAIL,
+      type: MESSAGE_TYPE.INFO,
+    });
+  });
 });
