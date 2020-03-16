@@ -204,6 +204,7 @@ const checkElementAvailability = async (state, { isAvailable }, { args: { select
       };
 
       const selectorText = buildRegexFromParamString(selector);
+      const markerText = buildRegexEscapedString(marker);
       await browser.execute(eraseHighlights);
 
       let result;
@@ -213,7 +214,7 @@ const checkElementAvailability = async (state, { isAvailable }, { args: { select
           result = await browser.execute(
             findElements,
             selectorText,
-            marker,
+            markerText,
             elementFinderOpts.returnMultiple,
             elementFinderOpts.highlightMatches,
             elementFinderOpts.innerHTMLOnly,

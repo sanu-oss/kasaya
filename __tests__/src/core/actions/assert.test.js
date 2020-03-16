@@ -5,6 +5,7 @@ const store = require('../../../../src/core/helpers/dataStore').store();
 const logger = require('../../../../src/utils/logger');
 const { findElements } = require('../../../../src/utils/browser/elementFinder');
 const { buildRegexFromParamString } = require('../../../../src/utils/buildRegex');
+const { buildRegexEscapedString } = require('../../../../src/utils/buildRegex');
 const { eraseHighlights } = require('../../../../src/utils/browser/eraser');
 const { checkElementAvailability } = require('../../../../src/core/actions/assert');
 
@@ -298,6 +299,7 @@ describe('assert action test suite', () => {
     const selector = uuid();
     const parsedSelector = buildRegexFromParamString(selector);
     const marker = uuid();
+    const parsedMarker = buildRegexEscapedString(marker);
     const returnMultiple = true;
     const highlightMatch = false;
     const innerHTMLOnly = false;
@@ -320,7 +322,7 @@ describe('assert action test suite', () => {
     expect(state.browser.execute).toHaveBeenCalledWith(
       findElements,
       parsedSelector,
-      marker,
+      parsedMarker,
       returnMultiple,
       highlightMatch,
       innerHTMLOnly,
@@ -349,6 +351,7 @@ describe('assert action test suite', () => {
     const selector = uuid();
     const parsedSelector = buildRegexFromParamString(selector);
     const marker = uuid();
+    const parsedMarker = buildRegexEscapedString(marker);
     const returnMultiple = true;
     const highlightMatch = false;
     const innerHTMLOnly = false;
@@ -371,7 +374,7 @@ describe('assert action test suite', () => {
     expect(state.browser.execute).toHaveBeenCalledWith(
       findElements,
       parsedSelector,
-      marker,
+      parsedMarker,
       returnMultiple,
       highlightMatch,
       innerHTMLOnly,
@@ -400,6 +403,7 @@ describe('assert action test suite', () => {
     const selector = uuid();
     const parsedSelector = buildRegexFromParamString(selector);
     const marker = uuid();
+    const parsedMarker = buildRegexEscapedString(marker);
     const returnMultiple = true;
     const highlightMatch = false;
     const innerHTMLOnly = false;
@@ -422,7 +426,7 @@ describe('assert action test suite', () => {
     expect(state.browser.execute).toHaveBeenCalledWith(
       findElements,
       parsedSelector,
-      marker,
+      parsedMarker,
       returnMultiple,
       highlightMatch,
       innerHTMLOnly,
