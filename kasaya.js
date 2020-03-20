@@ -398,6 +398,7 @@ app.addCommand({
 });
 app.addCommand({
   command: 'check if $selector near $marker is available',
+  aliases: ['check if $selector is available near $marker'],
   help:
     'check if "Out of Stock" near "Products" is available - Checks if "Out of Stock" near "Products" is within current window',
   handler: assert.checkElementAvailability.bind(null, state, {
@@ -406,6 +407,7 @@ app.addCommand({
 });
 app.addCommand({
   command: 'check if $selector near $marker is not available',
+  aliases: ['check if $selector is not available near $marker'],
   help:
     'check if "Out of Stock" near "Products" is not available - Checks if "Out of Stock" near "Products" is not within current window',
   handler: assert.checkElementAvailability.bind(null, state, {
